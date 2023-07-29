@@ -49,25 +49,25 @@ public class GetUsers : MonoBehaviour
     //Update User Score
     public async void UploadScore()  //CALLED when Uploading new Score to WEBSITE
     {
-        var url = $"http://104.40.246.13/Runner/api/User?userName={PlayerPrefs.GetString("CurrentPlayerName")}&score={PlayerPrefs.GetInt("score")}";
+        var url = $"http://212.68.34.215/RunnerApi/api/User?userName={PlayerPrefs.GetString("CurrentPlayerName")}&score={PlayerPrefs.GetInt("score")}";
         await DatabaseController.Put<string>(url, null);
     }
 
     // Create User
     public static async Task<string> CreateUsers(string username)  //CALLED when Uploading new Score to WEBSITE
     {
-        var url = "http://104.40.246.13/Runner/api/User?userName=" + username;
+        var url = "http://212.68.34.215/RunnerApi/api/User?userName=" + username;
         return await DatabaseController.Post<string>(url, null);
 
     }
     // Get User Rank Ten
     public async void GetUserRank()
     {
-        var url = "http://104.40.246.13/Runner/api/User";
+        var url = "http://212.68.34.215/RunnerApi/api/User";
 
         if (PlayerPrefs.HasKey("CurrentPlayerName"))
         {
-            var userRankUrl = "http://104.40.246.13/Runner/api/User/id?userName=" + PlayerPrefs.GetString("CurrentPlayerName");
+            var userRankUrl = "http://212.68.34.215/RunnerApi/api/User/id?userName=" + PlayerPrefs.GetString("CurrentPlayerName");
             string currentUserRank = await DatabaseController.Get<string>(userRankUrl);
             rankUserName.text = currentUserRank + ". " + PlayerPrefs.GetString("CurrentPlayerName");
             rankUserScore.text = PlayerPrefs.GetInt("score").ToString();
@@ -97,7 +97,7 @@ public class GetUsers : MonoBehaviour
         else
         {
 
-            var userRankUrl = "http://104.40.246.13/Runner/api/User/name?userName=" + searchUserNameInput.text;
+            var userRankUrl = "http://212.68.34.215/RunnerApi/api/User/name?userName=" + searchUserNameInput.text;
             var deneme = await DatabaseController.Get<List<SearchUserData>>(userRankUrl);
           
             if (deneme == null)
